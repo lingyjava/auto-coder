@@ -1,0 +1,36 @@
+package com.lingyuan.api.enums;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+/**
+ * @author LingYuan
+ * @description 业务类型枚举
+ */
+@Getter
+@AllArgsConstructor
+public enum BusinessTypeEnum {
+
+    JAVA_MODEL("java-model", "java-model.ftl"),
+    MYBATIS_XML("mybatis-xml", "mybatis-xml.ftl"),
+    ;
+
+    /**
+     * 标记
+     * */
+    private final String code;
+
+    /**
+     * 模板名称
+     * */
+    private final String tmpName;
+
+    public static BusinessTypeEnum getByCode(String code) {
+        for (BusinessTypeEnum businessTypeEnum : BusinessTypeEnum.values()) {
+            if (businessTypeEnum.getCode().equals(code)) {
+                return businessTypeEnum;
+            }
+        }
+        return null;
+    }
+}
