@@ -43,4 +43,6 @@ public class JavaModelData extends BaseData{
     private TableModel tableModel;
 
     private boolean lombok = false;
+
+    private String author;
 }

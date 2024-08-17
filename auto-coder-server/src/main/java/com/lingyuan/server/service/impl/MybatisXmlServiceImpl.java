@@ -53,8 +53,8 @@ public class MybatisXmlServiceImpl implements AutoCoderService {
         data.setTableModel(tableModel);
 
         data.setFileName(String.format("%sMapper.xml", CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, data.getTableModel().getTableName())));
-        data.setNamespace(String.format("%sdao.%sMapper", req.getPackageName() == null ? "" : req.getPackageName() + ".", CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, data.getTableModel().getTableName())));
-        data.setModelPath(String.format("%smodel.%s", req.getPackageName() == null ? "" : req.getPackageName() + ".", CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, data.getTableModel().getTableName())));
+        data.setNamespace(String.format("%sdao.%sMapper", req.getPackageName() == null || req.getPackageName().isEmpty() ? "" : req.getPackageName() + ".", CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, data.getTableModel().getTableName())));
+        data.setModelPath(String.format("%smodel.%s", req.getPackageName() == null || req.getPackageName().isEmpty() ? "" : req.getPackageName() + ".", CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, data.getTableModel().getTableName())));
 
         for (TableColumnModel columnModel : data.getTableModel().getColumns()) {
             if (columnModel.getPrimaryKey()) {

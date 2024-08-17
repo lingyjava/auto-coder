@@ -6,7 +6,7 @@ import ${path};
 
 /**
 * <#if tableModel?? && tableModel.databaseName??>${tableModel.databaseName}.</#if>${tableModel.tableName} Model
-<#if author??>* @author: ${author}</#if>
+* @author: ${author}
 * */
 <#if classAnnotation??>
 <#list classAnnotation as annotation>
@@ -17,7 +17,7 @@ public class ${className} <#if implementsClass?? && (implementsClass?size > 0)>i
 
 <#list tableModel.columns as column>
     /**
-    * ${column.columnComment}<#if column.primaryKey>（主键）</#if>
+    * ${column.columnComment}<#if column.primaryKey>(主键)</#if>
     * */
     private ${column.fieldType} ${column.fieldName};
 
