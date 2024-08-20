@@ -1,7 +1,6 @@
 package com.lingyuan.server.service.impl;
 
 import com.google.common.base.CaseFormat;
-import com.lingyuan.api.data.JavaMapperData;
 import com.lingyuan.api.data.JavaServiceData;
 import com.lingyuan.api.enums.BusinessTypeEnum;
 import com.lingyuan.api.exception.BusinessException;
@@ -56,7 +55,7 @@ public class JavaServiceServiceImpl implements AutoCoderService {
         data.setModelName(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableModel.getTableName()));
         data.setClassName(String.format("%sService", CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableModel.getTableName())));
         data.setFileName(String.format("%s.java", data.getClassName()));
-        data.setPackageName(String.format("%sservice.%s", req.getPackageName() != null && !req.getPackageName().isEmpty() ? req.getPackageName() + "." : "", data.getClassName()));
+        data.setPackageName(String.format("%sservice", req.getPackageName() != null && !req.getPackageName().isEmpty() ? req.getPackageName() + "." : ""));
         data.setClassDescription(data.getModelName() + "服务层接口");
 
         Set<String> imports = new HashSet<>();

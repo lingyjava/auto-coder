@@ -58,7 +58,7 @@ public class JavaModelServiceImpl implements AutoCoderService {
 
         data.setClassName(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableModel.getTableName()));
         data.setFileName(String.format("%s.java", data.getClassName()));
-        data.setPackageName(String.format("%smodel.%s", req.getPackageName() == null || req.getPackageName().isEmpty() ? "" : req.getPackageName() + ".", data.getClassName()));
+        data.setPackageName(String.format("%smodel", req.getPackageName() == null || req.getPackageName().isEmpty() ? "" : req.getPackageName() + "."));
 
         // 需导入的包
         Set<String> importPackPath = new LinkedHashSet<>();

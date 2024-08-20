@@ -54,7 +54,7 @@ public class JavaMapperServiceImpl implements AutoCoderService {
         data.setModelName(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableModel.getTableName()));
         data.setClassName(String.format("%sMapper", data.getModelName()));
         data.setFileName(String.format("%s.java", data.getClassName()));
-        data.setPackageName(req.getPackageName() != null && !req.getPackageName().isEmpty() ? req.getPackageName() + ".mapper." + data.getClassName() : "mapper." + data.getClassName());
+        data.setPackageName(req.getPackageName() != null && !req.getPackageName().isEmpty() ? req.getPackageName() + ".mapper" : "mapper");
         data.setClassDescription(tableModel.getTableName() + "数据访问层");
         data.setAuthor(req.getAuthor() == null || req.getAuthor().isEmpty() ? "AutoCoder" : req.getAuthor());
         Set<String> imports = new HashSet<>();
