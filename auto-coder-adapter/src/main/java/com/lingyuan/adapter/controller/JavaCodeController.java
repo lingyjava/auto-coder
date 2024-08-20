@@ -28,6 +28,12 @@ public class JavaCodeController {
         return Response.success(CoderStrategyFactory.get(BusinessTypeEnum.JAVA_SERVICE.getCode()).execute(req));
     }
 
+    @RequestMapping("/getJavaServiceImpl")
+    @ResponseBody
+    public Response<String> getJavaServiceImpl(@RequestBody BaseReq req) {
+        return Response.success(CoderStrategyFactory.get(BusinessTypeEnum.JAVA_SERVICE_IMPL.getCode()).execute(req));
+    }
+
     @RequestMapping("/getJavaMapper")
     @ResponseBody
     public Response<String> getJavaMapper(@RequestBody BaseReq req) {

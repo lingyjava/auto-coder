@@ -12,6 +12,7 @@ import lombok.Getter;
 public enum BusinessTypeEnum {
 
     JAVA_SERVICE("java-service", "java-service.ftl"),
+    JAVA_SERVICE_IMPL("java-service-impl", "java-service-impl.ftl"),
     JAVA_MAPPER("java-mapper", "java-mapper.ftl"),
     MYBATIS_XML("mybatis-xml", "mybatis-xml.ftl"),
     JAVA_MODEL("java-model", "java-model.ftl"),
