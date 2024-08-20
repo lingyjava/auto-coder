@@ -27,4 +27,10 @@ public class JavaCodeController {
     public Response<String> getMybatisXml(@RequestBody BaseReq req) {
         return Response.success(CoderStrategyFactory.get(BusinessTypeEnum.MYBATIS_XML.getCode()).execute(req));
     }
+
+    @RequestMapping("/getJavaMapper")
+    @ResponseBody
+    public Response<String> getJavaMapper(@RequestBody BaseReq req) {
+        return Response.success(CoderStrategyFactory.get(BusinessTypeEnum.JAVA_MAPPER.getCode()).execute(req));
+    }
 }
