@@ -51,13 +51,14 @@ public class JavaModelServiceImpl implements AutoCoderService {
 
     private JavaModelData getData(BaseReq req) {
         JavaModelData data = new JavaModelData();
+        data.setAuthor(req.getAuthor() == null || req.getAuthor().isEmpty() ? "AutoCoder" : req.getAuthor());
 
         TableModel tableModel = SQLParseUtil.buildTableModel(SQLParseUtil.parseDDL(req.getDdl(), req.getDbType()));
         data.setTableModel(tableModel);
 
         data.setClassName(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableModel.getTableName()));
         data.setFileName(String.format("%s.java", data.getClassName()));
-        data.setPackageName(String.format("%smodel.%s", req.getPackageName() == null ? "" : req.getPackageName() + ".", data.getClassName()));
+        data.setPackageName(String.format("%smodel.%s", req.getPackageName() == null || req.getPackageName().isEmpty() ? "" : req.getPackageName() + ".", data.getClassName()));
 
         // 需导入的包
         Set<String> importPackPath = new LinkedHashSet<>();
