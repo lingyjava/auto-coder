@@ -23,7 +23,12 @@ public interface ${className} {
     /**
     * 新增
     * /
-    ${modelName} insert(${modelName} model);
+    int insert(${modelName} model);
+
+    /**
+    * 新增多条
+    * /
+    int insertList(List<${modelName}> list);
 
     /**
     * 更新

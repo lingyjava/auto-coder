@@ -53,6 +53,21 @@
         )
     </insert>
 
+    <!-- 新增多条 -->
+    <insert id="insertList" keyProperty="<#if primaryKeyColumn??>${primaryKeyColumn.fieldName}</#if>" useGeneratedKeys="true">
+        INSERT INTO ${tableModel.tableName} (
+        <#list tableModel.columns as column>
+            ${column.columnName}<#sep>, </#sep>
+        </#list>
+        )
+        VALUES
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+        <#list tableModel.columns as column>
+            <#noparse>#</#noparse>{item.${column.fieldName}, jdbcType=${column.columnType?upper_case}}<#sep>, </#sep>
+        </#list>
+        </foreach>
+    </insert>
+
     <!-- 全量更新 -->
     <update id="update">
         UPDATE ${tableModel.tableName}
