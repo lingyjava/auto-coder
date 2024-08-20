@@ -11,9 +11,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum BusinessTypeEnum {
 
-    JAVA_MODEL("java-model", "java-model.ftl"),
+    JAVA_SERVICE("java-service", "java-service.ftl"),
     JAVA_MAPPER("java-mapper", "java-mapper.ftl"),
     MYBATIS_XML("mybatis-xml", "mybatis-xml.ftl"),
+    JAVA_MODEL("java-model", "java-model.ftl"),
     ;
 
     /**

@@ -22,10 +22,10 @@ public class JavaCodeController {
         return Response.success(CoderStrategyFactory.get(BusinessTypeEnum.JAVA_MODEL.getCode()).execute(req));
     }
 
-    @RequestMapping("/getMybatisXml")
+    @RequestMapping("/getJavaService")
     @ResponseBody
-    public Response<String> getMybatisXml(@RequestBody BaseReq req) {
-        return Response.success(CoderStrategyFactory.get(BusinessTypeEnum.MYBATIS_XML.getCode()).execute(req));
+    public Response<String> getJavaService(@RequestBody BaseReq req) {
+        return Response.success(CoderStrategyFactory.get(BusinessTypeEnum.JAVA_SERVICE.getCode()).execute(req));
     }
 
     @RequestMapping("/getJavaMapper")
@@ -33,4 +33,11 @@ public class JavaCodeController {
     public Response<String> getJavaMapper(@RequestBody BaseReq req) {
         return Response.success(CoderStrategyFactory.get(BusinessTypeEnum.JAVA_MAPPER.getCode()).execute(req));
     }
+
+    @RequestMapping("/getMybatisXml")
+    @ResponseBody
+    public Response<String> getMybatisXml(@RequestBody BaseReq req) {
+        return Response.success(CoderStrategyFactory.get(BusinessTypeEnum.MYBATIS_XML.getCode()).execute(req));
+    }
+
 }
