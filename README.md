@@ -2,11 +2,12 @@
 
 > 自动编码器，为重复的工作提供自动化解决方案。
 
-[在线演示](http://coder.lingyuan.tech/)，UI from [auto-coder-ui](https://github.com/lingyjava/auto-coder-ui) project.
+
+[在线演示](http://coder.lingyuan.tech/)（UI from [auto-coder-ui](https://github.com/lingyjava/auto-coder-ui) project）
 
 ## 已实现功能
 
-- 输入DDL语句，生成 Java 代码（Service/Impl、Mapper/Mybatis.xml，Model）.
+- 输入DDL语句，生成 Java 代码（Service/Impl、Mapper/Mybatis.xml，Model）
 
 ## 未来可能的更新
 
