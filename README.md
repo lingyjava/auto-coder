@@ -62,6 +62,9 @@ mvn spring-boot:run
 项目中配置文件为 `application.properties`，在 `src/main/resources` 文件夹下，可以配置项目的输出目录、压缩包目录等配置项。以下是配置示例：
 
 ```properties
+server.port=54321
+spring.application.name=auto-coder
+
 # 生成代码的基础目录
 output-dir= coder/
 
@@ -192,6 +195,10 @@ GET：`http://localhost:8080/api/download/code_1733192099060.zip`
 系统会自动执行定期清理任务，删除过期文件并清理空目录。[定时任务](src/main/java/com/lingyuan/codegen/scheduling/FileCleanupTask.java)的执行时间和文件过期时间可以根据实际需求调整。
 
 ## 注意事项
+
+### 默认端口
+
+项目默认端口为 54321，可通过配置文件修改。
 
 ### 确保配置的输出目录无其他文件
 
