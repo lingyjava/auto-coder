@@ -8,7 +8,6 @@ Auto Coder 是一个基于 FreeMarker 模板引擎的 Java 代码生成工具，
 
 - 解析数据库建表语句（DDL）并生成 Java 代码，支持生成以下代码：
   - **Model**（实体类）
-  - **DTO**（数据传输对象）
   - **Mapper 接口**
   - **Mapper.xml**（MyBatis XML 映射文件）
   - **Service 接口及实现**
