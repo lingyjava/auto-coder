@@ -2,7 +2,7 @@
 
 ## 项目介绍
 
-Auto Coder 是一个基于 FreeMarker 模板引擎的 Java 代码生成工具，旨在通过解析数据库建表语句（DDL），自动生成 Java 代码（包括 Model、DTO、Mapper 接口、Mapper.xml、Service 接口及实现、Controller 层等），极大地提高开发效率，减少手动编写模板代码的繁琐。
+Auto Coder 是一个基于 FreeMarker 模板引擎的 Java 代码生成工具，旨在通过解析数据库建表语句（DDL），自动生成 Java 代码（包括 Model、Mapper 接口、Mapper.xml、Service 接口及实现、Controller 层等），极大地提高开发效率，减少手动编写模板代码的繁琐。
 
 ## 功能特性
 
