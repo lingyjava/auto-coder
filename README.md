@@ -84,7 +84,7 @@ mvn clean package
 通过以下命令启动打包好的 JAR 文件：
 
 ```bash
-nohup java -jar AutoCoder-1.0.0-RELEASE.jar > AutoCoderLog.txt &`
+nohup java -jar AutoCoder-1.0.0-RELEASE.jar > AutoCoderLog.txt &
 ```
 
 - `AutoCoder-1.0.0-RELEASE.jar` 为 JAR 的包名，常见的为版本号可能不同，需替换为要启动的 JAR 包名称。
