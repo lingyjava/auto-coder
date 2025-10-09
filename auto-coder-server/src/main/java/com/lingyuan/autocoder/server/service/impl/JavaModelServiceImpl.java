@@ -77,14 +77,11 @@ public class JavaModelServiceImpl implements AutoCoderService {
 
         if (tableModel.getColumns() != null && !tableModel.getColumns().isEmpty()) {
             for (TableColumnModel column : tableModel.getColumns()) {
-                switch (column.getFieldType()) {
-                    case "BigDecimal" :
-                        importPackPath.add("java.math.BigDecimal");
-                        break;
-                    case "Date" :
-                        importPackPath.add("java.util.Date");
-                        break;
-                    default:
+                String fieldType = column.getFieldType();
+                if ("BigDecimal".equals(fieldType)) {
+                    importPackPath.add("java.math.BigDecimal");
+                } else if ("Date".equals(fieldType)) {
+                    importPackPath.add("java.util.Date");
                 }
             }
         }
