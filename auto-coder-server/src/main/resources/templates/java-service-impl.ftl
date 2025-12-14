@@ -5,7 +5,7 @@ import ${path};
 </#list>
 
 /**
-* @description: ${classDescription}
+* ${classDescription}
 * @author: ${author}
 * /
 @Service

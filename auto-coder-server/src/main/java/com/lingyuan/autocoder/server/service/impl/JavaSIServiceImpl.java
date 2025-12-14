@@ -6,7 +6,7 @@ import com.lingyuan.autocoder.api.enums.BusinessTypeEnum;
 import com.lingyuan.autocoder.api.exception.BusinessException;
 import com.lingyuan.autocoder.api.model.TableModel;
 import com.lingyuan.autocoder.api.req.BaseReq;
-import com.lingyuan.autocoder.common.SQLParseUtil;
+import com.lingyuan.autocoder.server.common.SQLParseUtil;
 import com.lingyuan.autocoder.server.config.FreeMarkerConfig;
 import com.lingyuan.autocoder.server.service.AutoCoderService;
 import com.lingyuan.autocoder.server.service.CoderStrategyFactory;

@@ -1,4 +1,4 @@
-package com.lingyuan.autocoder.common;
+package com.lingyuan.autocoder.server.common;
 
 /**
  * @author LingYuan

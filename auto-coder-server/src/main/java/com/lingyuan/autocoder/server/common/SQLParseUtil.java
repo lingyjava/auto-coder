@@ -1,4 +1,4 @@
-package com.lingyuan.autocoder.common;
+package com.lingyuan.autocoder.server.common;
 
 import com.alibaba.druid.sql.ast.statement.SQLColumnDefinition;
 import com.alibaba.druid.sql.ast.statement.SQLCreateTableStatement;

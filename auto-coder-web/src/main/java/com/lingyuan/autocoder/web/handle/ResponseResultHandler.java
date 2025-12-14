@@ -1,5 +1,6 @@
-package com.lingyuan.autocoder.adapter;
+package com.lingyuan.autocoder.web.handle;
 
+import com.lingyuan.autocoder.api.resp.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -8,8 +9,6 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-
-import com.lingyuan.autocoder.api.resp.Response;
 
 /**
  * @author LingYuan

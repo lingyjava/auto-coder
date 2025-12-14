@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoCoder</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 导航栏样式 */
+        .header {
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding: 0 24%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: auto;
+        }
+
+        .logo-img {
+            height: 36px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: #303133;
+            margin-left: 12px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-item {
+            color: #303133;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            color: #409eff;
+        }
+
+        .nav-item.active {
+            color: #409eff;
+            font-weight: 500;
+        }
+
+        .divider {
+            width: 1px;
+            height: 20px;
+            background: #dcdfe6;
+        }
+
+        .github-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .github-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* 主内容区域 */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: #303133;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            color: #909399;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-width: 1000px;
+        }
+
+        /* 配置表单区域 */
+        .form-section {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            width: 100%;
+        }
+
+        .form-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e4e7ed;
+        }
+
+        .form-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #303133;
+            margin-bottom: 6px;
+        }
+
+        .form-subtitle {
+            font-size: 13px;
+            color: #909399;
+        }
+
+        .form-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px 20px;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .form-actions {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .form-actions .btn {
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .form-group label {
+            color: #606266;
+            font-weight: 500;
+            font-size: 14px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .form-group.full-width label {
+            margin-bottom: 8px;
+        }
+
+        .form-group label .required {
+            color: #f56c6c;
+            margin-right: 4px;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea,
+        .form-group select {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s;
+            font-family: inherit;
+            color: #606266;
+        }
+
+        .form-group.full-width input[type="text"],
+        .form-group.full-width textarea,
+        .form-group.full-width select {
+            width: 100%;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #409eff;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .switch-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #dcdfe6;
+            transition: .3s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #409eff;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        .switch-label {
+            font-size: 14px;
+            color: #606266;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #409eff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #66b1ff;
+        }
+
+        .btn-secondary {
+            background: #909399;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #a6a9ad;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* 预览区域 */
+        .preview-section {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            min-height: 600px;
+            width: 100%;
+        }
+
+        .preview-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #303133;
+            margin-bottom: 16px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #e4e7ed;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 10px 16px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-size: 14px;
+            color: #606266;
+            transition: all 0.3s;
+            white-space: nowrap;
+            margin-bottom: -2px;
+        }
+
+        .tab.active {
+            color: #409eff;
+            border-bottom-color: #409eff;
+        }
+
+        .tab:hover {
+            color: #409eff;
+        }
+
+        .code-preview {
+            flex: 1;
+            position: relative;
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .code-preview pre {
+            margin: 0;
+            padding: 20px;
+            height: 100%;
+            overflow: auto;
+            white-space: pre; /* 保留空格和换行 */
+            background: #f6f8fa;
+        }
+
+        .code-preview code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            display: block; /* 确保代码块正确显示 */
+            white-space: pre; /* 保留空格和换行 */
+            color: #24292e;
+        }
+
+        /* 自定义代码高亮颜色 - 浅色主题 */
+        .code-preview .hljs {
+            background: #f6f8fa;
+            color: #24292e;
+        }
+
+        .code-preview .hljs-comment,
+        .code-preview .hljs-quote {
+            color: #6a737d;
+            font-style: italic;
+        }
+
+        .code-preview .hljs-keyword,
+        .code-preview .hljs-selector-tag,
+        .code-preview .hljs-subst {
+            color: #d73a49;
+            font-weight: bold;
+        }
+
+        .code-preview .hljs-number,
+        .code-preview .hljs-literal,
+        .code-preview .hljs-variable,
+        .code-preview .hljs-template-variable,
+        .code-preview .hljs-tag .hljs-attr {
+            color: #005cc5;
+        }
+
+        .code-preview .hljs-string,
+        .code-preview .hljs-doctag {
+            color: #032f62;
+        }
+
+        .code-preview .hljs-title,
+        .code-preview .hljs-section,
+        .code-preview .hljs-selector-id {
+            color: #6f42c1;
+            font-weight: bold;
+        }
+
+        .code-preview .hljs-type,
+        .code-preview .hljs-class .hljs-title {
+            color: #6f42c1;
+        }
+
+        .code-preview .hljs-tag,
+        .code-preview .hljs-name,
+        .code-preview .hljs-attribute {
+            color: #22863a;
+            font-weight: bold;
+        }
+
+        .code-preview .hljs-regexp,
+        .code-preview .hljs-link {
+            color: #032f62;
+        }
+
+        .code-preview .hljs-symbol,
+        .code-preview .hljs-bullet {
+            color: #e36209;
+        }
+
+        .code-preview .hljs-built_in,
+        .code-preview .hljs-builtin-name {
+            color: #005cc5;
+        }
+
+        .code-preview .hljs-meta {
+            color: #6a737d;
+        }
+
+        .code-preview .hljs-deletion {
+            background: #ffeef0;
+        }
+
+        .code-preview .hljs-addition {
+            background: #e6ffed;
+        }
+
+        .code-preview .hljs-emphasis {
+            font-style: italic;
+        }
+
+        .code-preview .hljs-strong {
+            font-weight: bold;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #409eff;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .copy-btn:hover {
+            background: #66b1ff;
+        }
+
+        .copy-btn.copied {
+            background: #67c23a;
+        }
+
+        .placeholder-text {
+            color: #909399;
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 14px;
+        }
+
+        .placeholder-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #409eff;
+            padding: 40px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e4e7ed;
+            border-top-color: #409eff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            color: #f56c6c;
+            background: #fef0f0;
+            border: 1px solid #fde2e2;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        /* 底部样式 */
+        .footer {
+            background: white;
+            padding: 24px 10%;
+            text-align: center;
+            border-top: 1px solid #e4e7ed;
+            color: #909399;
+            font-size: 13px;
+        }
+
+        .footer-divider {
+            width: 60%;
+            height: 1px;
+            background: #e4e7ed;
+            margin: 0 auto 16px;
+        }
+
+        .footer a {
+            color: #409eff;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1400px) {
+            .content-wrapper {
+                min-width: auto;
+            }
+            
+            .form-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 5%;
+            }
+
+            .main-content {
+                padding: 20px 5%;
+            }
+
+            .nav-menu {
+                gap: 15px;
+            }
+
+            .nav-item {
+                font-size: 13px;
+            }
+
+            .form-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="header">
+        <div class="logo-container">
+            <img src="/img/logo.png" alt="Logo" class="logo-img">
+            <span class="logo-text">𝑨𝒖𝒕𝒐 𝑪𝒐𝒅𝒆𝒓</span>
+        </div>
+        <div class="nav-menu">
+            <a href="/" class="nav-item active">首页</a>
+            <a href="/about" class="nav-item">关于</a>
+            <a href="https://github.com/lingyjava/auto-coder/issues" target="_blank" class="nav-item">Bug反馈</a>
+            <div class="divider"></div>
+            <a href="https://github.com/lingyjava/auto-coder" target="_blank" class="github-link">
+                <svg class="github-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#303133" d="M512 0C229.12 0 0 229.12 0 512c0 226.56 146.56 417.92 350.08 485.76 25.6 4.48 35.2-10.88 35.2-24.32 0-12.16-0.64-52.48-0.64-95.36-128.64 23.68-161.92-31.36-172.16-60.16-5.76-14.72-30.72-60.16-52.48-72.32-17.92-9.6-43.52-33.28-0.64-33.92 40.32-0.64 69.12 37.12 78.72 52.48 46.08 77.44 119.68 55.68 149.12 42.24 4.48-33.28 17.92-55.68 32.64-68.48-113.92-12.8-232.96-56.96-232.96-252.8 0-55.68 19.84-101.76 52.48-137.6-5.12-12.8-23.04-65.28 5.12-135.68 0 0 42.88-13.44 140.8 52.48 40.96-11.52 84.48-17.28 128-17.28 43.52 0 87.04 5.76 128 17.28 97.92-66.56 140.8-52.48 140.8-52.48 28.16 70.4 10.24 122.88 5.12 135.68 32.64 35.84 52.48 81.28 52.48 137.6 0 196.48-119.68 240-233.6 252.8 18.56 16 34.56 46.72 34.56 94.72 0 68.48-0.64 123.52-0.64 140.8 0 13.44 9.6 29.44 35.2 24.32C877.44 929.92 1024 737.92 1024 512 1024 229.12 794.88 0 512 0z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- 主内容 -->
+    <div class="main-content">
+        <!-- <div class="page-header">
+            <h1 class="page-title">🚀 代码生成器</h1>
+            <p class="page-subtitle">基于DDL语句自动生成Java代码 - 提供标准化的 Spring 分层架构代码 + MyBatis 的 CRUD 代码</p>
+        </div> -->
+
+        <div class="content-wrapper">
+            <!-- 配置表单 -->
+            <div class="form-section">
+                <div class="form-header">
+                    <div class="form-title">代码生成配置</div>
+                    <div class="form-subtitle">填写相关参数，生成高质量的代码模板</div>
+                </div>
+                
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+                <form id="codeForm">
+                    <div class="form-content">
+                        <div class="form-group">
+                            <label for="packageName"><span class="required">*</span>包名：</label>
+                            <input type="text" id="packageName" name="packageName" required 
+                                   placeholder="com.lingyuan" 
+                                   value="com.lingyuan">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="author">作者：</label>
+                            <input type="text" id="author" name="author" 
+                                   placeholder="LingYuan" 
+                                   value="LingYuan">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dbType">数据库类型：</label>
+                            <select id="dbType" name="dbType">
+                                <option value="MySQL" selected>MySQL</option>
+                                <option value="Oracle">Oracle</option>
+                                <option value="PostgresQL">PostgresQL</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lombok">使用 Lombok 注解：</label>
+                            <div class="switch-group">
+                                <label class="switch">
+                                    <input type="checkbox" id="lombok" name="lombok">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="serializable">实现序列化接口：</label>
+                            <div class="switch-group">
+                                <label class="switch">
+                                    <input type="checkbox" id="serializable" name="serializable" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="ddl"><span class="required">*</span>建表语句 (DDL)：</label>
+                            <textarea id="ddl" name="ddl" required placeholder="请输入建表语句...">CREATE TABLE `article` (
+  `article_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `article_title` varchar(512) NOT NULL COMMENT '标题',
+  `article_author` varchar(128) NOT NULL COMMENT '作者',
+  `article_content` text NOT NULL COMMENT '内容',
+  `create_by` bigint(20) NOT NULL COMMENT '创建人id',
+  `create_by_name` varchar(128) NOT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_by` bigint(20) DEFAULT NULL COMMENT '修改人id',
+  `update_by_name` varchar(128) DEFAULT NULL COMMENT '修改人',
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`article_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='文章主表';</textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-primary" onclick="generateAllCode()">执行生成</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 代码预览 -->
+            <div class="preview-section">
+                <h2 class="preview-title">代码预览</h2>
+                
+                <div class="tabs" id="tabs" style="display: none;">
+                    <!-- 动态生成的标签页 -->
+                </div>
+
+                <div class="code-preview" id="codePreview">
+                    <div class="placeholder-text">
+                        <div class="placeholder-icon">📝</div>
+                        <div>请在上方配置参数并点击"执行生成"按钮</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer">
+        <div class="footer-divider"></div>
+        <div>
+            Copyright © 2024-2025 LingYuan. All rights reserved
+            <span class="divider" style="display: inline-block; width: 1px; height: 12px; background: #dcdfe6; margin: 0 8px; vertical-align: middle;"></span>
+            <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2024248614号-1</a>
+        </div>
+    </div>
+
+    <script>
+        let generatedCodes = {};
+        let currentTab = null;
+
+        // 代码类型配置
+        const CODE_TYPES = [
+            { type: 'JAVA_MODEL', name: 'Model.java', api: '/java/getModel' },
+            { type: 'JAVA_SERVICE', name: 'Service.java', api: '/java/getJavaService' },
+            { type: 'JAVA_SERVICE_IMPL', name: 'ServiceImpl.java', api: '/java/getJavaServiceImpl' },
+            { type: 'JAVA_MAPPER', name: 'Mapper.java', api: '/java/getJavaMapper' },
+            { type: 'MYBATIS_XML', name: 'Mybatis.xml', api: '/java/getMybatisXml' }
+        ];
+
+        // 一键生成所有代码
+        async function generateAllCode() {
+            const form = document.getElementById('codeForm');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // 验证表单
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // 收集表单数据
+            const formData = {
+                ddl: document.getElementById('ddl').value.trim(),
+                dbType: document.getElementById('dbType').value,
+                packageName: document.getElementById('packageName').value.trim(),
+                author: document.getElementById('author').value.trim() || 'AutoCoder',
+                lombok: document.getElementById('lombok').checked,
+                serializable: document.getElementById('serializable').checked
+            };
+
+            // 显示加载状态
+            const codePreview = document.getElementById('codePreview');
+            codePreview.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <div>正在生成代码，请稍候...</div>
+                </div>
+            `;
+            errorMessage.style.display = 'none';
+
+            try {
+                // 并发请求所有代码类型
+                const promises = CODE_TYPES.map(config => 
+                    fetch(config.api, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    }).then(res => res.json()).then(result => ({ config, result }))
+                );
+
+                const results = await Promise.all(promises);
+                
+                // 清空之前的代码
+                generatedCodes = {};
+                
+                // 处理所有结果
+                let hasError = false;
+                let errorMsg = '';
+                
+                results.forEach(({ config, result }) => {
+                    console.log('Processing result:', config.name, result); // 调试信息
+                    // 后端返回的是 code: 200 表示成功，而不是 success: true
+                    if (result.code === 200 && result.data) {
+                        generatedCodes[config.type] = {
+                            name: config.name,
+                            code: result.data
+                        };
+                        console.log('Added code for:', config.name, 'Length:', result.data.length); // 调试信息
+                    } else {
+                        hasError = true;
+                        errorMsg = result.message || '生成失败';
+                        console.error('Generation failed for:', config.name, result); // 调试信息
+                    }
+                });
+
+                if (hasError) {
+                    throw new Error(errorMsg);
+                }
+
+                // 更新标签页并显示第一个代码
+                updateTabs();
+                showCode(CODE_TYPES[0].type);
+
+            } catch (error) {
+                errorMessage.textContent = '生成失败: ' + error.message;
+                errorMessage.style.display = 'block';
+                codePreview.innerHTML = `
+                    <div class="placeholder-text">
+                        <div class="placeholder-icon">❌</div>
+                        <div>生成失败，请检查参数并重试</div>
+                    </div>
+                `;
+            }
+        }
+
+        // 更新标签页
+        function updateTabs() {
+            const tabs = document.getElementById('tabs');
+            
+            if (Object.keys(generatedCodes).length === 0) {
+                tabs.style.display = 'none';
+                return;
+            }
+
+            tabs.style.display = 'flex';
+            tabs.innerHTML = '';
+
+            CODE_TYPES.forEach(config => {
+                if (generatedCodes[config.type]) {
+                    const tab = document.createElement('button');
+                    tab.className = 'tab';
+                    tab.textContent = config.name;
+                    tab.onclick = () => showCode(config.type);
+                    
+                    if (config.type === currentTab) {
+                        tab.classList.add('active');
+                    }
+                    
+                    tabs.appendChild(tab);
+                }
+            });
+        }
+
+        // 显示代码
+        function showCode(type) {
+            console.log('Showing code for type:', type); // 调试信息
+            currentTab = type;
+            updateTabs();
+
+            const codePreview = document.getElementById('codePreview');
+            const codeData = generatedCodes[type];
+
+            if (!codeData) {
+                console.error('No code data found for type:', type); // 调试信息
+                return;
+            }
+
+            console.log('Code data:', codeData.name, 'Length:', codeData.code.length); // 调试信息
+
+            // 判断代码语言类型
+            const language = type === 'MYBATIS_XML' ? 'xml' : 'java';
+
+            // 清空预览区域
+            codePreview.innerHTML = '';
+
+            // 创建复制按钮
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'copy-btn';
+            copyBtn.innerHTML = '<span>📋</span><span>复制代码</span>';
+            copyBtn.onclick = () => copyCode(type);
+
+            // 创建代码块
+            const pre = document.createElement('pre');
+            const code = document.createElement('code');
+            code.className = `language-${language}`;
+            code.textContent = codeData.code; // 使用 textContent 而不是 innerHTML
+            
+            pre.appendChild(code);
+            codePreview.appendChild(copyBtn);
+            codePreview.appendChild(pre);
+
+            console.log('Code element created, applying highlight...'); // 调试信息
+
+            // 应用代码高亮
+            try {
+                hljs.highlightElement(code);
+                console.log('Highlight applied successfully'); // 调试信息
+            } catch (e) {
+                console.error('Highlight failed:', e); // 调试信息
+            }
+        }
+
+        // 复制代码
+        function copyCode(type) {
+            const codeData = generatedCodes[type];
+            if (!codeData) return;
+
+            navigator.clipboard.writeText(codeData.code).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = '<span>✅</span><span>已复制</span>';
+                btn.classList.add('copied');
+
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                alert('复制失败: ' + err);
+            });
+        }
+
+        // 页面加载完成后自动生成代码
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('AutoCoder 已就绪');
+            // 自动执行生成
+            generateAllCode();
+        });
+    </script>
+</body>
+</html>

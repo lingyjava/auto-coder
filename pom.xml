@@ -15,11 +15,9 @@
     <version>1.0-RELEASE</version>
     <packaging>pom</packaging>
     <modules>
-        <module>auto-coder-common</module>
         <module>auto-coder-api</module>
-        <module>start</module>
         <module>auto-coder-server</module>
-        <module>auto-coder-adapter</module>
+        <module>auto-coder-web</module>
     </modules>
 
     <properties>

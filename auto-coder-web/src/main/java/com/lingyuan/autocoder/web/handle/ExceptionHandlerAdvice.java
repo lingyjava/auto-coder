@@ -1,5 +1,7 @@
-package com.lingyuan.autocoder.adapter;
+package com.lingyuan.autocoder.web.handle;
 
+import com.lingyuan.autocoder.api.exception.BusinessException;
+import com.lingyuan.autocoder.api.resp.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -7,9 +9,6 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import com.lingyuan.autocoder.api.exception.BusinessException;
-import com.lingyuan.autocoder.api.resp.Response;
 
 import java.nio.file.AccessDeniedException;
 

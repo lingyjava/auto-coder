@@ -4,19 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.lingyuan</groupId>
-        <artifactId>auto-coder</artifactId>
-        <version>1.0-RELEASE</version>
+          <groupId>com.lingyuan</groupId>
+          <artifactId>auto-coder</artifactId>
+          <version>1.0-RELEASE</version>
     </parent>
 
-    <packaging>jar</packaging>
-
-    <artifactId>auto-coder-adapter</artifactId>
+    <groupId>com.lingyuan</groupId>
+    <artifactId>auto-coder-web</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -25,13 +24,25 @@
             <artifactId>auto-coder-server</artifactId>
             <version>1.0-RELEASE</version>
         </dependency>
-
-        <!-- lombok start -->
+        
+        <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <!-- lombok end -->
+
+        <!-- Thymeleaf -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <exclusions>
+                <exclusion>
+                    <!-- 避免与 server 模块的 log4j2 冲突：排除默认日志（包含 log4j-to-slf4j） -->
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 
 </project>

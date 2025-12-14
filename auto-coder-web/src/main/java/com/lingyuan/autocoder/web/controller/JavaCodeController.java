@@ -1,10 +1,9 @@
-package com.lingyuan.autocoder.adapter.controller;
+package com.lingyuan.autocoder.web.controller;
 
 import com.lingyuan.autocoder.api.enums.BusinessTypeEnum;
 import com.lingyuan.autocoder.api.req.BaseReq;
 import com.lingyuan.autocoder.api.resp.Response;
 import com.lingyuan.autocoder.server.service.CoderStrategyFactory;
-
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

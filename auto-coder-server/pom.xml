@@ -22,7 +22,7 @@
     <dependencies>
         <dependency>
             <groupId>com.lingyuan</groupId>
-            <artifactId>auto-coder-common</artifactId>
+            <artifactId>auto-coder-api</artifactId>
             <version>1.0-RELEASE</version>
         </dependency>
 
@@ -60,6 +60,21 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <!-- lombok end -->
+
+        <!-- druid start -->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+        <!-- druid end -->
+
+        <!-- guava start -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <!-- guava end -->
 
     </dependencies>
 

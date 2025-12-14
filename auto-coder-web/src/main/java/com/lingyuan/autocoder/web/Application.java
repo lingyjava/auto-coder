@@ -1,18 +1,14 @@
-package com.lingyuan;
+package com.lingyuan.autocoder.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
 
 /**
  * @author LingYuan
  */
 @SpringBootApplication
-@ComponentScans(value = {
-        @ComponentScan(value = "com.lingyuan.adapter"),
-        @ComponentScan(value = "com.lingyuan.server"),
-})
+@ComponentScan(basePackages = "com.lingyuan.autocoder")
 public class Application {
 
     public static void main(String[] args) {
