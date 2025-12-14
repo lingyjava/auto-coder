@@ -11,7 +11,7 @@
 
     <groupId>com.lingyuan</groupId>
     <artifactId>auto-coder-web</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-RELEASE</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -23,6 +23,19 @@
             <groupId>com.lingyuan</groupId>
             <artifactId>auto-coder-server</artifactId>
             <version>1.0-RELEASE</version>
+        </dependency>
+        
+        <!-- Spring Boot Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <!-- 避免与 server 模块的 log4j2 冲突：排除默认日志（包含 log4j-to-slf4j / logback） -->
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         
         <!-- lombok -->
@@ -44,5 +57,25 @@
             </exclusions>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>auto-coder</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.lingyuan.autocoder.web.Application</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
