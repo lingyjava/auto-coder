@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -278,11 +279,11 @@
             border-radius: 50%;
         }
 
-        input:checked + .slider {
+        input:checked+.slider {
             background-color: #409eff;
         }
 
-        input:checked + .slider:before {
+        input:checked+.slider:before {
             transform: translateX(20px);
         }
 
@@ -387,7 +388,8 @@
             padding: 20px;
             height: 100%;
             overflow: auto;
-            white-space: pre; /* 保留空格和换行 */
+            white-space: pre;
+            /* 保留空格和换行 */
             background: #f6f8fa;
         }
 
@@ -395,8 +397,10 @@
             font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
             font-size: 13px;
             line-height: 1.6;
-            display: block; /* 确保代码块正确显示 */
-            white-space: pre; /* 保留空格和换行 */
+            display: block;
+            /* 确保代码块正确显示 */
+            white-space: pre;
+            /* 保留空格和换行 */
             color: #24292e;
         }
 
@@ -542,7 +546,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .error-message {
@@ -587,7 +593,7 @@
             .content-wrapper {
                 min-width: auto;
             }
-            
+
             .form-content {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -616,6 +622,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- 导航栏 -->
     <div class="header">
@@ -630,7 +637,8 @@
             <div class="divider"></div>
             <a href="https://github.com/lingyjava/auto-coder" target="_blank" class="github-link">
                 <svg class="github-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="#303133" d="M512 0C229.12 0 0 229.12 0 512c0 226.56 146.56 417.92 350.08 485.76 25.6 4.48 35.2-10.88 35.2-24.32 0-12.16-0.64-52.48-0.64-95.36-128.64 23.68-161.92-31.36-172.16-60.16-5.76-14.72-30.72-60.16-52.48-72.32-17.92-9.6-43.52-33.28-0.64-33.92 40.32-0.64 69.12 37.12 78.72 52.48 46.08 77.44 119.68 55.68 149.12 42.24 4.48-33.28 17.92-55.68 32.64-68.48-113.92-12.8-232.96-56.96-232.96-252.8 0-55.68 19.84-101.76 52.48-137.6-5.12-12.8-23.04-65.28 5.12-135.68 0 0 42.88-13.44 140.8 52.48 40.96-11.52 84.48-17.28 128-17.28 43.52 0 87.04 5.76 128 17.28 97.92-66.56 140.8-52.48 140.8-52.48 28.16 70.4 10.24 122.88 5.12 135.68 32.64 35.84 52.48 81.28 52.48 137.6 0 196.48-119.68 240-233.6 252.8 18.56 16 34.56 46.72 34.56 94.72 0 68.48-0.64 123.52-0.64 140.8 0 13.44 9.6 29.44 35.2 24.32C877.44 929.92 1024 737.92 1024 512 1024 229.12 794.88 0 512 0z"/>
+                    <path fill="#303133"
+                        d="M512 0C229.12 0 0 229.12 0 512c0 226.56 146.56 417.92 350.08 485.76 25.6 4.48 35.2-10.88 35.2-24.32 0-12.16-0.64-52.48-0.64-95.36-128.64 23.68-161.92-31.36-172.16-60.16-5.76-14.72-30.72-60.16-52.48-72.32-17.92-9.6-43.52-33.28-0.64-33.92 40.32-0.64 69.12 37.12 78.72 52.48 46.08 77.44 119.68 55.68 149.12 42.24 4.48-33.28 17.92-55.68 32.64-68.48-113.92-12.8-232.96-56.96-232.96-252.8 0-55.68 19.84-101.76 52.48-137.6-5.12-12.8-23.04-65.28 5.12-135.68 0 0 42.88-13.44 140.8 52.48 40.96-11.52 84.48-17.28 128-17.28 43.52 0 87.04 5.76 128 17.28 97.92-66.56 140.8-52.48 140.8-52.48 28.16 70.4 10.24 122.88 5.12 135.68 32.64 35.84 52.48 81.28 52.48 137.6 0 196.48-119.68 240-233.6 252.8 18.56 16 34.56 46.72 34.56 94.72 0 68.48-0.64 123.52-0.64 140.8 0 13.44 9.6 29.44 35.2 24.32C877.44 929.92 1024 737.92 1024 512 1024 229.12 794.88 0 512 0z" />
                 </svg>
             </a>
         </div>
@@ -650,23 +658,20 @@
                     <div class="form-title">代码生成配置</div>
                     <div class="form-subtitle">填写相关参数，生成高质量的代码模板</div>
                 </div>
-                
+
                 <div id="errorMessage" class="error-message" style="display: none;"></div>
 
                 <form id="codeForm">
                     <div class="form-content">
                         <div class="form-group">
                             <label for="packageName"><span class="required">*</span>包名：</label>
-                            <input type="text" id="packageName" name="packageName" required 
-                                   placeholder="com.lingyuan" 
-                                   value="com.lingyuan">
+                            <input type="text" id="packageName" name="packageName" required placeholder="com.lingyuan"
+                                value="com.lingyuan">
                         </div>
 
                         <div class="form-group">
                             <label for="author">作者：</label>
-                            <input type="text" id="author" name="author" 
-                                   placeholder="LingYuan" 
-                                   value="LingYuan">
+                            <input type="text" id="author" name="author" placeholder="LingYuan" value="LingYuan">
                         </div>
 
                         <div class="form-group">
@@ -725,7 +730,7 @@
             <!-- 代码预览 -->
             <div class="preview-section">
                 <h2 class="preview-title">代码预览</h2>
-                
+
                 <div class="tabs" id="tabs" style="display: none;">
                     <!-- 动态生成的标签页 -->
                 </div>
@@ -745,7 +750,8 @@
         <div class="footer-divider"></div>
         <div>
             Copyright © 2024-2025 LingYuan. All rights reserved
-            <span class="divider" style="display: inline-block; width: 1px; height: 12px; background: #dcdfe6; margin: 0 8px; vertical-align: middle;"></span>
+            <span class="divider"
+                style="display: inline-block; width: 1px; height: 12px; background: #dcdfe6; margin: 0 8px; vertical-align: middle;"></span>
             <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2024248614号-1</a>
         </div>
     </div>
@@ -767,7 +773,7 @@
         async function generateAllCode() {
             const form = document.getElementById('codeForm');
             const errorMessage = document.getElementById('errorMessage');
-            
+
             // 验证表单
             if (!form.checkValidity()) {
                 form.reportValidity();
@@ -796,7 +802,7 @@
 
             try {
                 // 并发请求所有代码类型
-                const promises = CODE_TYPES.map(config => 
+                const promises = CODE_TYPES.map(config =>
                     fetch(config.api, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -805,14 +811,14 @@
                 );
 
                 const results = await Promise.all(promises);
-                
+
                 // 清空之前的代码
                 generatedCodes = {};
-                
+
                 // 处理所有结果
                 let hasError = false;
                 let errorMsg = '';
-                
+
                 results.forEach(({ config, result }) => {
                     console.log('Processing result:', config.name, result); // 调试信息
                     // 后端返回的是 code: 200 表示成功，而不是 success: true
@@ -852,7 +858,7 @@
         // 更新标签页
         function updateTabs() {
             const tabs = document.getElementById('tabs');
-            
+
             if (Object.keys(generatedCodes).length === 0) {
                 tabs.style.display = 'none';
                 return;
@@ -867,11 +873,11 @@
                     tab.className = 'tab';
                     tab.textContent = config.name;
                     tab.onclick = () => showCode(config.type);
-                    
+
                     if (config.type === currentTab) {
                         tab.classList.add('active');
                     }
-                    
+
                     tabs.appendChild(tab);
                 }
             });
@@ -910,7 +916,7 @@
             const code = document.createElement('code');
             code.className = `language-${language}`;
             code.textContent = codeData.code; // 使用 textContent 而不是 innerHTML
-            
+
             pre.appendChild(code);
             codePreview.appendChild(copyBtn);
             codePreview.appendChild(pre);
@@ -931,27 +937,61 @@
             const codeData = generatedCodes[type];
             if (!codeData) return;
 
-            navigator.clipboard.writeText(codeData.code).then(() => {
-                const btn = document.querySelector('.copy-btn');
+            const btn = document.querySelector('.copy-btn');
+            if (!btn) return;
+
+            const showSuccess = () => {
                 const originalHtml = btn.innerHTML;
                 btn.innerHTML = '<span>✅</span><span>已复制</span>';
                 btn.classList.add('copied');
-
                 setTimeout(() => {
                     btn.innerHTML = originalHtml;
                     btn.classList.remove('copied');
                 }, 2000);
-            }).catch(err => {
-                alert('复制失败: ' + err);
-            });
+            };
+
+            const fallbackCopy = (text) => {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    const ok = document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    if (ok) {
+                        showSuccess();
+                    } else {
+                        alert('复制失败，请手动复制');
+                    }
+                } catch (e) {
+                    document.body.removeChild(textarea);
+                    alert('复制失败，请手动复制');
+                }
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                // 现代浏览器 + 安全上下文（HTTPS 或 localhost）
+                navigator.clipboard.writeText(codeData.code)
+                    .then(showSuccess)
+                    .catch(err => {
+                        // Clipboard API 失败时，自动降级
+                        fallbackCopy(codeData.code);
+                    });
+            } else {
+                // 不支持 Clipboard API，直接走降级方案
+                fallbackCopy(codeData.code);
+            }
         }
 
         // 页面加载完成后自动生成代码
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('AutoCoder 已就绪');
             // 自动执行生成
             generateAllCode();
         });
     </script>
 </body>
+
 </html>
